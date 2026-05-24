@@ -2,12 +2,12 @@ name: Keep Vercel API Alive
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # 每 5 分钟 ping 一次 API
+    - cron: "*/15 * * * *"  # 每 15 分钟 ping 一次（更温和）
   workflow_dispatch:        # 允许手动触发
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping the API to keep it awake
-        run: curl https://api.onegrow.xyz/personalized
+      - name: Ping API root to keep it awake
+        run: curl -Is https://api.onegrow.xyz/ > /dev/null 2>&1
